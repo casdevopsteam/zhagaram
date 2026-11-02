@@ -1,7 +1,7 @@
 import { Target, BookOpen, HeartPulse, GraduationCap, CheckCircle2, ShieldCheck, Mail, MapPin, Sparkles, Award, Globe, Youtube, FileText, ExternalLink, Linkedin } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { useData } from '../context/DataContext';
-import { TrustLogo, BookCoverGraphic } from '../components/common/VisualAsset';
+import { BookCoverGraphic } from '../components/common/VisualAsset';
 
 interface AboutPageProps {
   onNavigate: (route: string) => void;
@@ -71,8 +71,16 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
         
         {/* Page Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="flex justify-center mb-6">
+            <div className="inline-block bg-white p-3 sm:p-4 rounded-md shadow-xs border border-[#E8DFD5]">
+              <img
+                src="/assets/zhagaram-brand-logo.jpg"
+                alt="Zhagaram Trust — ழகரம் அறக்கட்டளை"
+                className="h-12 sm:h-14 md:h-16 w-auto object-contain block"
+              />
+            </div>
+          </div>
           <div className="inline-flex items-center gap-2 mb-3">
-            <TrustLogo size={32} />
             <span className="text-xs uppercase tracking-widest font-semibold text-[#C85A32]">
               {t('எங்களைப் பற்றி · அறக்கட்டளையின் நோக்கு', 'About Zhagaram Trust · Foundations')}
             </span>

@@ -12,7 +12,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
   const { settings } = useData();
 
   const tamilPictureUrl = '/assets/aistudio/WhatsApp_Image_2026-10-20_at_1.07.37_PM_8790fe47.jpeg';
-  const zhagaramLogoUrl = '/assets/aistudio/WhatsApp_Image_2026-10-20_at_1.07.36_PM_1015e3fc.jpeg';
+  const zhagaramLogoUrl = '/assets/zhagaram-emblem-short.png';
   const mbbsBookPhotoUrl = '/assets/aistudio/WhatsApp_Image_2026-10-20_at_1.07.57_PM_9e5db21a.jpeg';
 
   return (

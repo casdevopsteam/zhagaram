@@ -12,7 +12,6 @@ import { VideosPage } from './pages/VideosPage';
 import { PublicationsPage } from './pages/PublicationsPage';
 import { EventsPage } from './pages/EventsPage';
 import { ContactPage } from './pages/ContactPage';
-import { AdminPage } from './pages/AdminPage';
 import { ImageLightbox } from './components/modals/ImageLightbox';
 import { DocumentViewerModal } from './components/modals/DocumentViewerModal';
 import { VideoPlayerModal } from './components/modals/VideoPlayerModal';
@@ -27,7 +26,7 @@ const MainAppContent: React.FC = () => {
   const [currentRoute, setCurrentRoute] = useState<string>(() => {
     if (typeof window !== 'undefined') {
       const path = window.location.pathname;
-      if (['/about', '/images', '/documents', '/videos', '/publications', '/events', '/contact', '/admin'].includes(path)) {
+      if (['/about', '/images', '/documents', '/videos', '/publications', '/events', '/contact'].includes(path)) {
         return path;
       }
     }
@@ -118,7 +117,6 @@ const MainAppContent: React.FC = () => {
         )}
         {currentRoute === '/events' && <EventsPage />}
         {currentRoute === '/contact' && <ContactPage />}
-        {currentRoute === '/admin' && <AdminPage />}
       </main>
 
       {/* Shared Editorial Footer */}

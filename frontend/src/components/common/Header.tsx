@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Search, Menu, X, Shield, ArrowRight } from 'lucide-react';
+import { Search, Menu, X } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
-import { TrustLogo } from './VisualAsset';
 
 interface HeaderProps {
   currentRoute: string;
@@ -29,22 +28,18 @@ export const Header: React.FC<HeaderProps> = ({ currentRoute, onNavigate, onOpen
       <div className="w-full px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
         <div className="flex items-center justify-between h-14 sm:h-16 md:h-20 gap-1.5 sm:gap-4 md:gap-6 w-full">
           
-          {/* ZONE 1: Brand Wordmark (Anchored Left, Fits Mobile Cleanly) */}
-          <div className="flex items-center justify-start min-w-0 flex-1 xl:flex-initial xl:shrink-0">
+          {/* ZONE 1: Official Brand Logo Lockup */}
+          <div className="flex items-center justify-start min-w-0 shrink-0">
             <button
               onClick={() => onNavigate('/')}
-              className="flex items-center gap-1.5 sm:gap-2.5 text-left focus:outline-hidden group min-w-0"
-              aria-label="Zhagaram Trust Homepage"
+              className="flex items-center text-left focus:outline-hidden group py-1"
+              aria-label="Zhagaram Trust — ழகரம் அறக்கட்டளை"
             >
-              <TrustLogo size={28} className="w-7 h-7 sm:w-8 sm:h-8 transition-transform group-hover:scale-105 shrink-0" />
-              <div className="flex flex-col min-w-0">
-                <span className="font-tamil-serif font-bold text-xs sm:text-base lg:text-lg text-[#132B20] tracking-tight leading-none group-hover:text-[#C85A32] transition-colors truncate max-w-[170px] sm:max-w-none">
-                  {language === 'ta' ? 'ழகரம் அறக்கட்டளை' : 'Zhagaram Trust'}
-                </span>
-                <span className="text-[10px] text-[#786E63] font-serif tracking-widest uppercase mt-0.5 whitespace-nowrap hidden lg:inline truncate">
-                  {language === 'ta' ? 'தமிழ் அறிவுக் களஞ்சியம்' : 'Tamil Knowledge Foundation'}
-                </span>
-              </div>
+              <img
+                src="/assets/zhagaram-brand-logo.jpg"
+                alt="Zhagaram Trust — ழகரம் அறக்கட்டளை"
+                className="h-10 sm:h-12 md:h-14 w-auto max-w-[200px] sm:max-w-[260px] md:max-w-[300px] object-contain mix-blend-multiply transition-transform group-hover:scale-[1.02]"
+              />
             </button>
           </div>
 
@@ -95,23 +90,6 @@ export const Header: React.FC<HeaderProps> = ({ currentRoute, onNavigate, onOpen
               <span className={language === 'en' ? 'text-[#C85A32] font-bold' : 'text-[#786E63]'}>EN</span>
             </button>
 
-            {/* Admin CMS Access Link - Icon on mobile, Icon+text on desktop */}
-            <button
-              onClick={() => onNavigate('/admin')}
-              className={`flex items-center gap-1 p-1 sm:px-2.5 sm:py-1 border rounded-sm transition-colors text-xs font-semibold whitespace-nowrap shrink-0 shadow-2xs ${
-                currentRoute === '/admin'
-                  ? 'border-[#C85A32] bg-[#C85A32] text-white shadow-xs'
-                  : 'border-[#D5C9BD] bg-white/80 hover:bg-white text-[#132B20] hover:border-[#C85A32]'
-              }`}
-              aria-label={language === 'ta' ? 'நிர்வாகி' : 'Admin'}
-              title={language === 'ta' ? 'நிர்வாகி பலகை' : 'Admin Portal'}
-            >
-              <Shield className="w-3.5 h-3.5 text-[#C85A32]" />
-              <span className="hidden sm:inline font-semibold text-xs">
-                {language === 'ta' ? 'நிர்வாகி' : 'Admin'}
-              </span>
-            </button>
-
             {/* Three Navigation Bar (Hamburger Menu ☰) - Always visible on mobile/tablet */}
             <button
               onClick={() => setMobileMenuOpen(prev => !prev)}
@@ -150,23 +128,6 @@ export const Header: React.FC<HeaderProps> = ({ currentRoute, onNavigate, onOpen
                   </button>
                 );
               })}
-              
-              {/* Prominent Admin Access Card in Mobile Drawer */}
-              <div className="pt-3 mt-2 border-t border-[#E8DFD5] flex flex-col gap-2 px-3">
-                <button
-                  onClick={() => {
-                    onNavigate('/admin');
-                    setMobileMenuOpen(false);
-                  }}
-                  className="w-full flex items-center justify-between p-2.5 bg-[#132B20] hover:bg-[#1C3E2F] text-white rounded-sm text-xs font-semibold shadow-xs transition-colors"
-                >
-                  <div className="flex items-center gap-2">
-                    <Shield className="w-4 h-4 text-[#E5A086]" />
-                    <span>{language === 'ta' ? 'நிர்வாகி பலகை (Admin Portal)' : 'Administrator Portal'}</span>
-                  </div>
-                  <ArrowRight className="w-3.5 h-3.5 text-[#E5A086]" />
-                </button>
-              </div>
             </div>
           </div>
         )}

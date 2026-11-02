@@ -2,7 +2,6 @@ import React from 'react';
 import { Mail, Phone, MapPin, Youtube, ExternalLink, ShieldCheck } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
 import { useData } from '../../context/DataContext';
-import { TrustLogo } from './VisualAsset';
 
 interface FooterProps {
   onNavigate: (route: string) => void;
@@ -54,16 +53,18 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           
           {/* Col 1: Trust brand & reg */}
           <div className="md:col-span-1">
-            <div className="flex items-center gap-3 mb-4">
-              <TrustLogo size={36} variant="light" />
-              <div>
-                <h4 className="font-tamil-serif font-bold text-lg text-white">
-                  {t(settings.trust_name_ta, settings.trust_name_en)}
-                </h4>
-                <p className="text-[10px] text-[#A6B8AC] tracking-wider uppercase">
-                  {t('அறக்கட்டளை', 'Educational Trust')}
-                </p>
-              </div>
+            <div className="mb-5">
+              <button
+                onClick={() => onNavigate('/')}
+                className="inline-block bg-white p-3 sm:p-3.5 rounded-md shadow-sm border border-white/30 hover:opacity-95 transition-opacity text-left cursor-pointer"
+                aria-label="Zhagaram Trust — ழகரம் அறக்கட்டளை"
+              >
+                <img
+                  src="/assets/zhagaram-brand-logo.jpg"
+                  alt="Zhagaram Trust — ழகரம் அறக்கட்டளை"
+                  className="h-14 sm:h-16 md:h-18 w-auto max-w-[260px] sm:max-w-[290px] object-contain block"
+                />
+              </button>
             </div>
             <p className="text-xs text-[#A6B8AC] leading-relaxed mb-4">
               {t(
@@ -151,14 +152,6 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   {t('தொடர்பு & ஆலோசனைகள்', 'Contact & Inquiries')}
                 </button>
               </li>
-              <li>
-                <button
-                  onClick={() => onNavigate('/admin')}
-                  className="hover:text-[#E5A086] transition-colors"
-                >
-                  {t('நிர்வாகப் பகுதி (Admin Portal)', 'Administrator CMS')}
-                </button>
-              </li>
             </ul>
           </div>
 
@@ -189,19 +182,27 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         </div>
 
         {/* Bottom copyright hairline */}
-        <div className="mt-12 pt-6 border-t border-[#234233] flex flex-col sm:flex-row items-center justify-between text-[11px] text-[#86998C] gap-3">
+        <div className="mt-12 pt-6 border-t border-[#234233] flex flex-col sm:flex-row items-center justify-between text-[11px] text-[#86998C] gap-4">
           <p>
             © {new Date().getFullYear()} {t(settings.trust_name_ta, settings.trust_name_en)}. {t('அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.', 'All rights reserved.')}
           </p>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center gap-4 sm:gap-6">
             <span>{t('தமிழ்-முதல் கல்வி தளம்', 'Tamil-First Knowledge Initiative')}</span>
-            <span>·</span>
-            <button
-              onClick={() => onNavigate('/admin')}
-              className="text-[#B3C4B8] hover:text-white transition-colors"
-            >
-              {t('நிர்வாக உள்நுழைவு', 'Admin Access')}
-            </button>
+            <div className="flex items-center gap-2.5 text-[#A6B8AC]">
+              <span className="text-xs sm:text-sm font-medium tracking-wide text-[#C4D4C8]">
+                Powered by
+              </span>
+              <div
+                className="inline-flex items-center bg-white px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-sm shadow-xs border border-white/20"
+                title="CubeAI Solutions"
+              >
+                <img
+                  src="/assets/cubeai-solutions-logo.png"
+                  alt="CubeAI Solutions"
+                  className="h-7 sm:h-8 md:h-9 w-auto object-contain block"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>

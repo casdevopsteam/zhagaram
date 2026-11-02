@@ -49,6 +49,59 @@ export const TrustLogo: React.FC<{ size?: number; className?: string; variant?: 
   );
 };
 
+export const TrustBrandLogo: React.FC<{
+  className?: string;
+  variant?: 'navbar' | 'card' | 'plain' | 'emblem';
+  size?: 'sm' | 'md' | 'lg';
+  alt?: string;
+}> = ({
+  className = '',
+  variant = 'plain',
+  size = 'md',
+  alt = 'Zhagaram Trust — ழகரம் அறக்கட்டளை'
+}) => {
+  if (variant === 'emblem') {
+    const emblemDimensions = {
+      sm: 'w-7 h-7 sm:w-8 sm:h-8',
+      md: 'w-9 h-9 sm:w-10 sm:h-10',
+      lg: 'w-12 h-12 sm:w-14 sm:h-14',
+    }[size];
+    return (
+      <img
+        src="/assets/zhagaram-emblem-short.png"
+        alt={alt}
+        className={`${emblemDimensions} object-contain rounded-full bg-white p-0.5 shadow-2xs border border-[#E0D7CC] shrink-0 ${className}`}
+      />
+    );
+  }
+
+  const sizeClass = {
+    sm: 'h-8 sm:h-9',
+    md: 'h-10 sm:h-12 md:h-14',
+    lg: 'h-12 sm:h-14 md:h-16',
+  }[size];
+
+  if (variant === 'card') {
+    return (
+      <div className={`inline-block bg-white p-2.5 sm:p-3 rounded-md shadow-xs border border-[#E8DFD5] ${className}`}>
+        <img
+          src="/assets/zhagaram-brand-logo.jpg"
+          alt={alt}
+          className={`${sizeClass} w-auto object-contain block`}
+        />
+      </div>
+    );
+  }
+
+  return (
+    <img
+      src="/assets/zhagaram-brand-logo.jpg"
+      alt={alt}
+      className={`${sizeClass} w-auto object-contain ${variant === 'navbar' ? 'mix-blend-multiply' : ''} ${className}`}
+    />
+  );
+};
+
 export const BookCoverGraphic: React.FC<{
   title_ta: string;
   title_en: string;
