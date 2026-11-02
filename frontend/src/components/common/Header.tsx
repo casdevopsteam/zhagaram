@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Search, Menu, X } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
 
@@ -11,6 +11,16 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({ currentRoute, onNavigate, onOpenSearch }) => {
   const { language, toggleLanguage, t } = useLanguage();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 8);
+    };
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const navLinks = [
     { route: '/', label_ta: 'முகப்பு', label_en: 'Home' },
@@ -24,7 +34,9 @@ export const Header: React.FC<HeaderProps> = ({ currentRoute, onNavigate, onOpen
   ];
 
   return (
-    <header className="sticky top-0 z-40 bg-[#FAF8F5]/95 backdrop-blur-md border-b border-[#E8DFD5] transition-colors w-full">
+    <header className={`sticky top-0 z-50 bg-[#FAF8F5]/95 backdrop-blur-md border-b transition-all duration-200 w-full ${
+      isScrolled ? 'border-[#D5C9BD] shadow-md shadow-[#132B20]/5' : 'border-[#E8DFD5]'
+    }`}>
       <div className="w-full px-2 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
         <div className="flex items-center justify-between h-14 sm:h-16 md:h-20 gap-1.5 sm:gap-4 md:gap-6 w-full">
           
