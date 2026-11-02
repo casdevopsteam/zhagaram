@@ -22,6 +22,17 @@ export const Header: React.FC<HeaderProps> = ({ currentRoute, onNavigate, onOpen
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Close mobile drawer when screen resizes to laptop/desktop width (>= 1024px)
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        setMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const navLinks = [
     { route: '/', label_ta: 'முகப்பு', label_en: 'Home' },
     { route: '/about', label_ta: 'எங்களைப் பற்றி', label_en: 'About' },
@@ -50,21 +61,21 @@ export const Header: React.FC<HeaderProps> = ({ currentRoute, onNavigate, onOpen
               <img
                 src="/assets/zhagaram-brand-logo.jpg"
                 alt="Zhagaram Trust — ழகரம் அறக்கட்டளை"
-                className="h-10 sm:h-12 md:h-14 w-auto max-w-[200px] sm:max-w-[260px] md:max-w-[300px] object-contain mix-blend-multiply transition-transform group-hover:scale-[1.02]"
+                className="h-10 sm:h-11 md:h-12 lg:h-13 xl:h-14 w-auto max-w-[180px] sm:max-w-[210px] md:max-w-[240px] lg:max-w-[260px] xl:max-w-[290px] object-contain mix-blend-multiply transition-transform group-hover:scale-[1.02]"
               />
             </button>
           </div>
 
-          {/* ZONE 2: Desktop Navigation Links (Centered, Uses All Available Center Space) */}
-          <nav className="hidden xl:flex flex-1 items-center justify-center min-w-0 px-2 lg:px-4">
-            <div className="flex items-center gap-1 xl:gap-2 2xl:gap-3 text-xs xl:text-xs 2xl:text-sm font-medium text-[#4A4036]">
+          {/* ZONE 2: Desktop Navigation Links (Visible on Laptop & Desktop >= 1024px) */}
+          <nav className="hidden lg:flex flex-1 items-center justify-center min-w-0 px-2 lg:px-3 xl:px-6">
+            <div className="flex items-center gap-0.5 lg:gap-1 xl:gap-2 2xl:gap-3 text-xs xl:text-xs 2xl:text-sm font-medium text-[#4A4036]">
               {navLinks.map(link => {
                 const isActive = currentRoute === link.route;
                 return (
                   <button
                     key={link.route}
                     onClick={() => onNavigate(link.route)}
-                    className={`relative py-1.5 px-2 xl:px-2.5 2xl:px-3 transition-colors whitespace-nowrap shrink-0 hover:text-[#132B20] ${
+                    className={`relative py-1.5 px-1.5 lg:px-2 xl:px-2.5 2xl:px-3 transition-colors whitespace-nowrap shrink-0 hover:text-[#132B20] ${
                       isActive ? 'text-[#C85A32] font-semibold' : ''
                     }`}
                   >
@@ -102,10 +113,10 @@ export const Header: React.FC<HeaderProps> = ({ currentRoute, onNavigate, onOpen
               <span className={language === 'en' ? 'text-[#C85A32] font-bold' : 'text-[#786E63]'}>EN</span>
             </button>
 
-            {/* Three Navigation Bar (Hamburger Menu ☰) - Always visible on mobile/tablet */}
+            {/* Three Navigation Bar (Hamburger Menu ☰) - Visible ONLY on small screens / mobile (< 1024px) */}
             <button
               onClick={() => setMobileMenuOpen(prev => !prev)}
-              className="xl:hidden p-1 sm:p-1.5 text-[#132B20] hover:text-[#C85A32] hover:bg-[#EFE7DE] rounded-sm shrink-0 transition-colors"
+              className="lg:hidden p-1 sm:p-1.5 text-[#132B20] hover:text-[#C85A32] hover:bg-[#EFE7DE] rounded-sm shrink-0 transition-colors"
               aria-label="Toggle navigation menu"
               title="பட்டி (Menu)"
             >
@@ -114,9 +125,9 @@ export const Header: React.FC<HeaderProps> = ({ currentRoute, onNavigate, onOpen
           </div>
         </div>
 
-        {/* Mobile / Tablet Navigation Dropdown */}
+        {/* Mobile / Tablet Navigation Dropdown (Only on < 1024px) */}
         {mobileMenuOpen && (
-          <div className="xl:hidden py-4 border-t border-[#E8DFD5] bg-[#FAF8F5] max-h-[calc(100vh-4.5rem)] overflow-y-auto animate-in slide-in-from-top-2 duration-150">
+          <div className="lg:hidden py-4 border-t border-[#E8DFD5] bg-[#FAF8F5] max-h-[calc(100vh-4.5rem)] overflow-y-auto animate-in slide-in-from-top-2 duration-150">
             <div className="flex flex-col space-y-1">
               {navLinks.map(link => {
                 const isActive = currentRoute === link.route;
